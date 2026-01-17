@@ -20,7 +20,7 @@ export class CreateNewsDto {
 
   @ApiProperty({ example: 123 })
   @IsString()
-  matn?: string;
+  matn?: number;
 
   @ApiProperty({ example: 'Описание новости' })
   @IsString()

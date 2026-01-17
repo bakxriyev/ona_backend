@@ -7,13 +7,13 @@ export class Service extends Model<Service> {
 id: number;
 
 
-@Column(DataType.BIGINT) full_name?: number;
-@Column(DataType.BIGINT) description?: number;
-@Column(DataType.BIGINT) description_ru?: number;
-@Column(DataType.STRING) title?: string;
-@Column(DataType.STRING) title_ru?: string;
-@Column(DataType.STRING) full_name_ru?: string;
-@Column(DataType.STRING) photo?: string;
-@Column(DataType.STRING) video?: string;
-@Column(DataType.STRING) about?: string;
+@Column(DataType.TEXT) full_name?: string;
+@Column(DataType.TEXT) description?: string;
+@Column(DataType.TEXT) description_ru?: string;
+@Column(DataType.TEXT) title?: string;
+@Column(DataType.TEXT) title_ru?: string;
+@Column(DataType.TEXT) full_name_ru?: string;
+@Column(DataType.TEXT) photo?: string;
+@Column(DataType.TEXT) video?: string;
+@Column(DataType.TEXT) about?: string;
 }

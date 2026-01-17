@@ -11,7 +11,7 @@ id: number;
 @Column({ type: DataType.STRING, allowNull: true }) description?: string;
 @Column({ type: DataType.STRING, allowNull: true }) title?: string;
 @Column({ type: DataType.STRING, allowNull: true }) video?: string;
-@Column({ type: DataType.BIGINT, allowNull: true }) matn?: string;
+@Column({ type: DataType.STRING, allowNull: true }) matn?: number;
 @Column({ type: DataType.STRING, allowNull: true }) description_ru?: string;
 @Column({ type: DataType.STRING, allowNull: true }) title_ru?: string;
 @Column({ type: DataType.STRING, allowNull: true }) matn_ru?: string;

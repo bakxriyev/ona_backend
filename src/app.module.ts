@@ -63,7 +63,7 @@ import { AuthModule } from "./modules/auth/auth.module";
         models:[About,Admin,Blog,Career,Direction,DirectionDoctors,Doctor,Insurance,News,Resume,Service,User],
         autoLoadModels: true,
         synchronize: true,
-        // sync: { alter: true },
+        sync: { alter: true },
         logging: config.get<string>("app.nodeEnv") === "development",
       }),
     }),

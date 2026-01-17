@@ -4,7 +4,7 @@ import { IsOptional, IsString } from 'class-validator';
 export class CreateInsuranceDto {
   @ApiProperty({ example: 123 })
   @IsString()
-  full_name?: number;
+  full_name?: string;
 
   @ApiProperty({ example: 'Insurance Title' })
   @IsString()
@@ -12,7 +12,7 @@ export class CreateInsuranceDto {
 
   @ApiProperty({ example: 456 })
   @IsString()
-  description?: number;
+  description?: string;
 
   @ApiProperty({ example: 'Insurance details' })
   @IsString()

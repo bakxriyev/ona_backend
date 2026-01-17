@@ -3,16 +3,16 @@ import { IsOptional, IsString } from 'class-validator';
 
 export class CreateServiceDto {
   @ApiProperty({ example: 123 })
-  @IsString()
-  full_name?: number;
+@IsOptional()
+  full_name?: string;
 
   @ApiProperty({ example: 456 })
   @IsString()
-  description?: number;
+  description?: string;
 
   @ApiProperty({ example: 789 })
   @IsString()
-  description_ru?: number;
+  description_ru?: string;
 
   @ApiProperty({ example: 'Service title' })
   @IsString()
