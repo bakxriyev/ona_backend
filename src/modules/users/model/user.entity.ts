@@ -17,4 +17,23 @@ phone_number?: number;
 
 @Column({ type: DataType.STRING, allowNull: true })
 photo?: string;
+
+@Column({ type: DataType.STRING, allowNull: false })
+  department: string;
+
+  // 👨‍⚕️ Shifokor (ixtiyoriy)
+  @Column({ type: DataType.STRING, allowNull: true })
+  doctor_name?: string;
+
+  // 📝 Bemor shikoyati / izoh
+  @Column({ type: DataType.TEXT, allowNull: true })
+  message?: string;
+
+  // 📅 Qabul qilish sanasi
+  @Column({ type: DataType.DATE, allowNull: true })
+  appointment_date?: Date;
+
+  // ⏰ Qabul vaqti
+  @Column({ type: DataType.STRING, allowNull: true })
+  appointment_time?: string;
 }

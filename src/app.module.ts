@@ -10,7 +10,7 @@ import { join } from "path";
 import { AppConfig } from "./config/app.config";
 import { DatabaseConfig } from "./config/database.config";
 import { AdminModule } from './modules/admin/admin.module';
-import { UserModule } from './modules/users/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { NewsModule } from './modules/news/news.module';
 import { BlogModule } from './modules/blog/blog.module';
 import { InsuranceModule } from './modules/insurance/insurance.module';
@@ -69,7 +69,7 @@ import { AuthModule } from "./modules/auth/auth.module";
     }),
 
     AdminModule,
-    UserModule,
+    UsersModule,
     NewsModule,
     BlogModule,
     InsuranceModule,

@@ -1,100 +1,60 @@
 import {
   Controller,
-  Post,
   Get,
-  Param,
-  Delete,
-  Put,
+  Post,
   Body,
-  UploadedFile,
-  UseInterceptors,
-} from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { ApiConsumes, ApiTags, ApiBody } from "@nestjs/swagger";
-import { diskStorage } from "multer";
-import { extname } from "path";
-import { UserService } from "./users.service";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
+  Param,
+  Patch,
+  Delete,
+  Query,
+  Res
+} from '@nestjs/common';
+import { ApiTags, ApiQuery } from '@nestjs/swagger';
+import { UsersService } from './users.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { QueryUserDto } from './dto/query-user.dto';
 
-@ApiTags("Users")
-@Controller("users")
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+import { Response } from 'express';
 
-  // ---------------- CREATE ---------------------
-  @Post("create")
-  @ApiConsumes("multipart/form-data")
-  @UseInterceptors(
-    FileInterceptor("photo", {
-      storage: diskStorage({
-        destination: "./uploads/user",
-        filename: (req, file, cb) => {
-          cb(null, Date.now() + extname(file.originalname));
-        },
-      }),
-    }),
-  )
-  @ApiBody({
-    schema: {
-      type: "object",
-      properties: {
-        full_name: { type: "string" },
-        phone_number: { type: "number" },
-        photo: { type: "string", format: "binary" },
-      },
-    },
-  })
-  create(@Body() dto: CreateUserDto, @UploadedFile() file: Express.Multer.File) {
-    return this.userService.create(dto, file?.filename);
+
+@ApiTags('Clinic Requests')
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Post()
+  create(@Body() dto: CreateUserDto) {
+    return this.usersService.create(dto);
   }
 
-  // ---------------- FIND ALL ---------------------
+  // 📋 Pagination + sort + filter
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Query() query: QueryUserDto) {
+    return this.usersService.findAll(query);
   }
 
-  // ---------------- FIND ONE ---------------------
-  @Get(":id")
-  findOne(@Param("id") id: number) {
-    return this.userService.findOne(id);
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.usersService.findOne(+id);
   }
 
-  // ---------------- UPDATE ---------------------
-  @Put(":id")
-  @ApiConsumes("multipart/form-data")
-  @UseInterceptors(
-    FileInterceptor("photo", {
-      storage: diskStorage({
-        destination: "./uploads/user",
-        filename: (req, file, cb) => {
-          cb(null, Date.now() + extname(file.originalname));
-        },
-      }),
-    }),
-  )
-  @ApiBody({
-    schema: {
-      type: "object",
-      properties: {
-        full_name: { type: "string" },
-        phone_number: { type: "number" },
-        photo: { type: "string", format: "binary" },
-      },
-    },
-  })
-  update(
-    @Param("id") id: number,
-    @Body() dto: UpdateUserDto,
-    @UploadedFile() file: Express.Multer.File,
-  ) {
-    return this.userService.update(id, dto, file?.filename);
+  @Patch(':id')
+  update(@Param('id') id: number, @Body() dto: UpdateUserDto) {
+    return this.usersService.update(+id, dto);
   }
 
-  // ---------------- DELETE ---------------------
-  @Delete(":id")
-  remove(@Param("id") id: number) {
-    return this.userService.remove(id);
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.usersService.remove(+id);
   }
+  // 📊 Excel export
+@Get('export/excel')
+exportToExcel(
+  @Query() query: QueryUserDto,
+  @Res() res: Response,
+) {
+  return this.usersService.exportToExcel(query, res);
+}
+
 }
