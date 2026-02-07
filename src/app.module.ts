@@ -34,7 +34,9 @@ import { Resume } from "./modules/resume/model/resume.entity";
 import { Service } from "./modules/services/model/service.entity";
 import { User } from "./modules/users/model/user.entity";
 import { AuthModule } from "./modules/auth/auth.module";
-
+import { Usercha, UserchaModule } from "./modules/usercha";
+import { ServiceDetailModule } from './modules/service_details/service_details.module';
+import {ServiceDetail} from './modules/service_details/entities/service_detail.entity'
 @Module({
   imports: [
     // Static uploads folder
@@ -60,7 +62,7 @@ import { AuthModule } from "./modules/auth/auth.module";
         username: config.get<string>("database.username"),
         password: config.get<string>("database.password"),
         database: config.get<string>("database.database"),
-        models:[About,Admin,Blog,Career,Direction,DirectionDoctors,Doctor,Insurance,News,Resume,Service,User],
+        models:[About,Admin,Blog,Usercha,Career,Direction,DirectionDoctors,Doctor,Insurance,News,Resume,Service,User,ServiceDetail],
         autoLoadModels: true,
         synchronize: true,
         sync: { alter: true },
@@ -80,7 +82,9 @@ import { AuthModule } from "./modules/auth/auth.module";
     ResumeModule,
     AboutModule,
     ServiceModule,
-    AuthModule
+    AuthModule,
+    UserchaModule,
+    ServiceDetailModule
     // Mailer setup
     // MailerModule.forRootAsync({
     //   imports: [ConfigModule],

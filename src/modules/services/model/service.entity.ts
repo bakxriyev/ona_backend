@@ -1,6 +1,8 @@
 import { Table, Column, Model, DataType } from "sequelize-typescript";
-
-
+import { ServiceDetail } from "../../service_details/entities/service_detail.entity";
+import {
+  HasMany
+} from "sequelize-typescript";
 @Table({ tableName: 'services', timestamps: true })
 export class Service extends Model<Service> {
 @Column({ type: DataType.BIGINT, primaryKey: true, autoIncrement: true })
@@ -16,4 +18,7 @@ id: number;
 @Column(DataType.TEXT) photo?: string;
 @Column(DataType.TEXT) video?: string;
 @Column(DataType.TEXT) about?: string;
+
+@HasMany(() => ServiceDetail)
+details?: ServiceDetail[];
 }

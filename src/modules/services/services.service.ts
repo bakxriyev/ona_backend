@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Service } from './model/service.entity';
+import { ServiceDetail } from '../service_details/entities/service_detail.entity';
 import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 
@@ -13,11 +14,25 @@ export class ServiceService {
   }
 
   findAll() {
-    return this.serviceRepo.findAll();
+    return this.serviceRepo.findAll({
+      include: [
+        {
+          model: ServiceDetail,
+          as: 'details',
+        },
+      ],
+    });
   }
 
   async findOne(id: number) {
-    const service = await this.serviceRepo.findByPk(id);
+    const service = await this.serviceRepo.findByPk(id, {
+      include: [
+        {
+          model: ServiceDetail,
+          as: 'details',
+        },
+      ],
+    });
     if (!service) throw new NotFoundException('Service not found');
     return service;
   }
