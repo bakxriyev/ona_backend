@@ -33,10 +33,6 @@ export class UserchaController {
     summary: 'Hamma userlarni pagination bilan olish',
     description: 'Page, limit, address filter va search qo\'llab-quvvatlanadi'
   })
-  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
-  @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
-  @ApiQuery({ name: 'address', required: false, enum: ['a', 'b'] })
-  @ApiQuery({ name: 'search', required: false, type: String })
   @ApiResponse({ 
     status: 200, 
     description: 'Returns paginated users with total count',
@@ -53,41 +49,37 @@ export class UserchaController {
   @Get()
   async getAllUsers(@Query() query: GetUsersQueryDto): Promise<{ 
     users: Usercha[], 
-    total: number, 
-    page: number, 
-    limit: number,
-    totalPages: number 
   }> {
     return this.userService.getAllUsers(query);
   }
 
   // ✅ 2. Faqat "a" address'li userlarni olish
-  @ApiOperation({ summary: 'Faqat "a" address\'li userlarni olish' })
-  @ApiQuery({ name: 'page', required: false, type: Number })
-  @ApiQuery({ name: 'limit', required: false, type: Number })
-  @Get('address-a')
-  async getUsersByAddressA(@Query() query: GetUsersQueryDto): Promise<{ 
-    users: Usercha[], 
-    total: number, 
-    page: number, 
-    limit: number 
-  }> {
-    return this.userService.getUsersByAddressA(query);
-  }
+  // @ApiOperation({ summary: 'Faqat "a" address\'li userlarni olish' })
+  // @ApiQuery({ name: 'page', required: false, type: Number })
+  // @ApiQuery({ name: 'limit', required: false, type: Number })
+  // @Get('address-a')
+  // async getUsersByAddressA(@Query() query: GetUsersQueryDto): Promise<{ 
+  //   users: Usercha[], 
+  //   total: number, 
+  //   page: number, 
+  //   limit: number 
+  // }> {
+  //   return this.userService.getUsersByAddressA(query);
+  // }
 
   // ✅ 3. Faqat "b" address'li userlarni olish
-  @ApiOperation({ summary: 'Faqat "b" address\'li userlarni olish' })
-  @ApiQuery({ name: 'page', required: false, type: Number })
-  @ApiQuery({ name: 'limit', required: false, type: Number })
-  @Get('address-b')
-  async getUsersByAddressB(@Query() query: GetUsersQueryDto): Promise<{ 
-    users: Usercha[], 
-    total: number, 
-    page: number, 
-    limit: number 
-  }> {
-    return this.userService.getUsersByAddressB(query);
-  }
+  // @ApiOperation({ summary: 'Faqat "b" address\'li userlarni olish' })
+  // @ApiQuery({ name: 'page', required: false, type: Number })
+  // @ApiQuery({ name: 'limit', required: false, type: Number })
+  // @Get('address-b')
+  // async getUsersByAddressB(@Query() query: GetUsersQueryDto): Promise<{ 
+  //   users: Usercha[], 
+  //   total: number, 
+  //   page: number, 
+  //   limit: number 
+  // }> {
+  //   return this.userService.getUsersByAddressB(query);
+  // }
 
   // ✅ 4. Eng yangi userlarni olish
   @ApiOperation({ summary: 'Eng yangi 10 ta userni olish' })
